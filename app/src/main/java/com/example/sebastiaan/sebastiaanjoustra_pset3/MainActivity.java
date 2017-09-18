@@ -17,7 +17,6 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    //320ef4da2162e681bff239ba0d904786
 
     EditText etTrackName;
 
@@ -38,9 +37,11 @@ public class MainActivity extends AppCompatActivity {
         etTrackName.getText().clear();
     }
 
-    public void trackStartIntent(String trackData) {
+    public void trackStartIntent(Track[] trackData) {
         Intent dataIntent = new Intent(this, DataActivity.class);
-        dataIntent.putExtra("data", trackData);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("tracks", trackData);
+        dataIntent.putExtras(bundle);
         this.startActivity(dataIntent);
     }
 }

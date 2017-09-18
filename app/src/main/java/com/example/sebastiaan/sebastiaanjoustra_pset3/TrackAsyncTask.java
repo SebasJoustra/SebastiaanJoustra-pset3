@@ -2,6 +2,7 @@ package com.example.sebastiaan.sebastiaanjoustra_pset3;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -38,22 +39,41 @@ public class TrackAsyncTask extends AsyncTask<String, Integer, String> {
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
         String data = "";
-        //ArrayList<String> data = new ArrayList<String>();
+        Track[] trackArray = null;
+
         try {
             JSONObject trackStreamObj = new JSONObject(result);
             JSONObject resultsObj = trackStreamObj.getJSONObject("results");
             JSONObject trackMatchesObj = resultsObj.getJSONObject("trackmatches");
             JSONArray tracksArray = trackMatchesObj.getJSONArray("track");
             data = tracksArray.toString();
-            //System.out.println(tracksArray.toString());
 
-//            for(int i=0; i<tracksArray.length(); i++) {
-//                tracksArray.getJSONObject(i);
-//            }
+            trackArray = makeTrackObject(tracksArray);
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        this.mainAct.trackStartIntent(data);
+        this.mainAct.trackStartIntent(trackArray);
+    }
+
+    private Track[] makeTrackObject(JSONArray tracksArray) {
+        Track[] trackArray = new Track[tracksArray.length()];
+
+        try {
+            for (int i = 0; i < tracksArray.length(); i++) {
+                JSONObject trackObj = tracksArray.getJSONObject(i);
+                String songName = trackObj.getString("name");
+                String artistName = trackObj.getString("artist");
+                String lastFMUrl = trackObj.getString("url");
+                JSONArray imagesArray = trackObj.getJSONArray("image");
+                JSONObject imageObj = imagesArray.getJSONObject(2);
+                String imageUrl = imageObj.getString("#text");
+                trackArray[i] = new Track(songName, artistName, imageUrl, lastFMUrl);
+            }
+        } catch(JSONException e) {
+            e.printStackTrace();
+        }
+
+        return trackArray;
     }
 }

@@ -1,5 +1,6 @@
 package com.example.sebastiaan.sebastiaanjoustra_pset3;
 
+import android.content.Intent;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,42 +27,39 @@ public class DataActivity extends AppCompatActivity {
     ListView lvItems;
     String tracksString;
     ArrayList<String> trackArray = new ArrayList<String>();
+    Track [] trackObjectsArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data);
 
-        //tvResult = (TextView) findViewById(R.id.tvResult);
         lvItems = (ListView) findViewById(R.id.lvItems);
         assert lvItems != null;
 
-        Bundle extras = getIntent().getExtras();
-        tracksString = extras.getString("data");
+        Intent intent = this.getIntent();
+        Bundle bundle = intent.getExtras();
+
+        trackObjectsArray = (Track[]) bundle.getSerializable("tracks");
+
         makeTrackArray();
         makeTrackAdapter();
 
+        lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(getApplicationContext(), TrackViewActivity.class);
+                intent.putExtra("track", trackObjectsArray[i]);
+                startActivity(intent);
+            }
+        });
     }
 
     private void makeTrackArray() {
-        JSONArray jsonArray = null;
-
-        try {
-            jsonArray = new JSONArray(tracksString);
-            Log.d(TAG, String.valueOf(jsonArray.length()));
-            JSONObject testObj = jsonArray.getJSONObject(4);
-            for(int i=0; i<jsonArray.length(); i++) {
-                JSONObject trackObj = jsonArray.getJSONObject(i);
-                String songName = trackObj.getString("name");
-                String artistName = trackObj.getString("artist");
-                System.out.println(songName);
-                trackArray.add(songName + " - " + artistName);
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
+        for(Track track : trackObjectsArray) {
+            trackArray.add(track.getSongName() + " - " + track.getArtist());
         }
-
     }
 
 
