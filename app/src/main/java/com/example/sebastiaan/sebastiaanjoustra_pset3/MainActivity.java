@@ -3,10 +3,14 @@ package com.example.sebastiaan.sebastiaanjoustra_pset3;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -27,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
     EditText etTrackName;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,8 +51,29 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //makeSharedPrefs();
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.nav_home:
+
+                    return true;
+                case R.id.nav_list:
+                    Intent intentToList = new Intent(getApplicationContext(), TrackListActivity.class);
+                    startActivity(intentToList);
+                    finish();
+                    return true;
+            }
+            return false;
+        }
+
+    };
 
     public void trackSearch(View view) {
         String trackSearch = etTrackName.getText().toString();

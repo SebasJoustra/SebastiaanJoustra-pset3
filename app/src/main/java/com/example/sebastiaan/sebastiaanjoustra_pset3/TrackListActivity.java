@@ -3,9 +3,13 @@ package com.example.sebastiaan.sebastiaanjoustra_pset3;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -45,7 +49,29 @@ public class TrackListActivity extends Activity {
                 finish();
             }
         });
+
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.nav_home:
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    getApplicationContext().startActivity(intent);
+                    finish();
+                    return true;
+                case R.id.nav_list:
+                    return true;
+            }
+            return false;
+        }
+
+    };
 
     private void makeStringList() {
         arrayStringList = new ArrayList<String>();
