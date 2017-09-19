@@ -88,11 +88,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void trackStartIntent(Track[] trackData) {
-        Intent dataIntent = new Intent(this, DataActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("tracks", trackData);
-        dataIntent.putExtras(bundle);
-        this.startActivity(dataIntent);
+        if(trackData != null) {
+            Intent dataIntent = new Intent(this, DataActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("tracks", trackData);
+            dataIntent.putExtras(bundle);
+            this.startActivity(dataIntent);
+        } else {
+            Toast.makeText(this, "Did not receive information from server...", Toast.LENGTH_LONG).show();
+        }
     }
 
     private void makeSharedPrefs() {
