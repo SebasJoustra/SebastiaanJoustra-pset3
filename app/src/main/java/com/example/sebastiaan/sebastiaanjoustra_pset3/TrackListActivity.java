@@ -42,6 +42,7 @@ public class TrackListActivity extends Activity {
                 Intent intent = new Intent(getApplicationContext(), TrackViewActivity.class);
                 intent.putExtra("track", trackList.get(i));
                 startActivity(intent);
+                finish();
             }
         });
     }

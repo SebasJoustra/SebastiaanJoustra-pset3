@@ -136,6 +136,13 @@ public class TrackViewActivity extends AppCompatActivity {
 
     }
 
+    public void onBackPressed() {
+        Intent intent = new Intent(this, TrackListActivity.class);
+        this.startActivity(intent);
+
+        finish();
+    }
+
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
         // Source: https://stackoverflow.com/questions/5776851/load-image-from-url
         ImageView ivTrackImage;
