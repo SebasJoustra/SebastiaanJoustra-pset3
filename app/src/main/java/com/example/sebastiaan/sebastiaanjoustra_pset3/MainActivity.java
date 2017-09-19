@@ -1,11 +1,17 @@
 package com.example.sebastiaan.sebastiaanjoustra_pset3;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 
@@ -25,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         etTrackName = (EditText) findViewById(R.id.etTrackName);
         assert etTrackName != null;
 
@@ -35,19 +40,25 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println(keyCode);
                 System.out.println(keyEvent);
                 if ((keyEvent.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    trackSearch();
+                    trackSearch((View) etTrackName);
                 }
                 return false;
             }
         });
+
+        //makeSharedPrefs();
     }
 
-    public void trackSearch() {
+    public void trackSearch(View view) {
         String trackSearch = etTrackName.getText().toString();
-        TrackAsyncTask asyncTask = new TrackAsyncTask(this);
-        asyncTask.execute(trackSearch);
+        if(trackSearch.matches("")) {
+            Toast.makeText(this, "Please give an input...", Toast.LENGTH_SHORT).show();
+        } else {
+            TrackAsyncTask asyncTask = new TrackAsyncTask(this);
+            asyncTask.execute(trackSearch);
 
-        etTrackName.getText().clear();
+            etTrackName.getText().clear();
+        }
     }
 
     public void trackStartIntent(Track[] trackData) {
@@ -57,4 +68,23 @@ public class MainActivity extends AppCompatActivity {
         dataIntent.putExtras(bundle);
         this.startActivity(dataIntent);
     }
+
+    private void makeSharedPrefs() {
+        ArrayList<Track> newArray = new ArrayList<Track>();
+        newArray.add(new Track("a", "b", "c", "d"));
+
+
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
+        SharedPreferences.Editor editor = prefs.edit();
+
+        Gson gson = new Gson();
+        String jsonList = gson.toJson(newArray);
+
+        editor.putString("tracks", jsonList);
+        editor.apply();
+
+    }
+
+
 }

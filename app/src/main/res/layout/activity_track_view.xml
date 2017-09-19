@@ -6,24 +6,26 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.sebastiaan.sebastiaanjoustra_pset3.TrackViewActivity">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.5">
 
         <ImageView
-        android:id="@+id/ivTrack"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
-        app:srcCompat="@mipmap/ic_launcher"
-        android:adjustViewBounds="true" />
+            android:id="@+id/ivTrack"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            app:srcCompat="@mipmap/ic_launcher"
+            android:adjustViewBounds="true" />
     </RelativeLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.5">
+        android:layout_weight="0.5"
+        android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -56,5 +58,23 @@
                 android:layout_marginTop="20dp"
                 android:text="Go to last.FM page" />
         </LinearLayout>
-    </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:id="@+id/btAddToTrackList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:text="@string/add_to_track_list_btn"
+                android:onClick="saveToSharedPrefs"/>
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>

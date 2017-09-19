@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">SebastiaanJoustra-pset3</string>
+    <string name="app_name">Track List</string>
+    <string name="search_btn">Search</string>
+    <string name="add_to_track_list_btn">Add to track list</string>
+    <string name="track_name_or_artist_hint">Track name or artist</string>
+    <string name="remove_from_list_bt">Remove from list</string>
 </resources>

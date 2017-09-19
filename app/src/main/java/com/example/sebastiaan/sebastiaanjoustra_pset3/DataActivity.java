@@ -1,5 +1,6 @@
 package com.example.sebastiaan.sebastiaanjoustra_pset3;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.support.v7.app.AppCompatActivity;
@@ -21,11 +22,8 @@ import java.util.List;
 
 
 public class DataActivity extends AppCompatActivity {
-    private static final String TAG = DataActivity.class.getSimpleName();
 
-    TextView tvResult;
     ListView lvItems;
-    String tracksString;
     ArrayList<String> trackArray = new ArrayList<String>();
     Track [] trackObjectsArray;
 
@@ -52,6 +50,7 @@ public class DataActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), TrackViewActivity.class);
                 intent.putExtra("track", trackObjectsArray[i]);
                 startActivity(intent);
+                finish();
             }
         });
     }
