@@ -19,7 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".DataActivity" />
-        <activity android:name=".TrackViewActivity"></activity>
+        <activity android:name=".TrackViewActivity" />
+        <activity android:name=".TrackListActivity"></activity>
     </application>
 
 </manifest>

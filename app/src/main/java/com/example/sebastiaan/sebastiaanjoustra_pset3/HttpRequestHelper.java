@@ -23,8 +23,8 @@ public class HttpRequestHelper {
         String APIkey = "320ef4da2162e681bff239ba0d904786";
 
         try {
-            //url = new URL("http://ws.audioscrobbler.com/2.0/?method=track.search&track=" + chosenTag + "&api_key="+ APIkey + "&format=json");
-            url = new URL("http://ws.audioscrobbler.com/2.0/?method=track.search&track=halo&api_key=320ef4da2162e681bff239ba0d904786&format=json");
+            url = new URL("http://ws.audioscrobbler.com/2.0/?method=track.search&track=" + chosenTag + "&api_key="+ APIkey + "&format=json");
+            //url = new URL("http://ws.audioscrobbler.com/2.0/?method=track.search&track=halo&api_key=320ef4da2162e681bff239ba0d904786&format=json");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

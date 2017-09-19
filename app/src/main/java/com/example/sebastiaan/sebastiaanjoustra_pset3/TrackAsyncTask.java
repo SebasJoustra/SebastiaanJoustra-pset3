@@ -66,7 +66,7 @@ public class TrackAsyncTask extends AsyncTask<String, Integer, String> {
                 String artistName = trackObj.getString("artist");
                 String lastFMUrl = trackObj.getString("url");
                 JSONArray imagesArray = trackObj.getJSONArray("image");
-                JSONObject imageObj = imagesArray.getJSONObject(2);
+                JSONObject imageObj = imagesArray.getJSONObject(3);
                 String imageUrl = imageObj.getString("#text");
                 trackArray[i] = new Track(songName, artistName, imageUrl, lastFMUrl);
             }
