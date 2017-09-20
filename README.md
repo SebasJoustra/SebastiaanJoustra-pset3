@@ -14,4 +14,4 @@ Open in Android Studio and run on a Android device with 7.0 or higher.
 ### Screenshots
 ![Screenshot 1](doc/screenshot1.png)
 ![Screenshot 2](doc/screenshot2.png)
-![Screenshot 3](doc/screenshot3.png)
+![Screenshot 3](doc/screenshot3x.png)
