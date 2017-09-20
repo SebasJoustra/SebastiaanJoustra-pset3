@@ -2,15 +2,11 @@ package com.example.sebastiaan.sebastiaanjoustra_pset3;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * Created by Sebastiaan on 18-Sep-17.

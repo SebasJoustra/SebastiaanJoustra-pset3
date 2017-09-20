@@ -73,6 +73,7 @@
                 android:layout_marginBottom="5dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
+                android:drawableLeft="@drawable/ic_playlist_add_white_18dp"
                 android:text="@string/add_to_track_list_btn"
                 android:onClick="saveToSharedPrefs"/>
         </LinearLayout>
